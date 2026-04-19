@@ -1,4 +1,5 @@
 """
+
     def los_probability :
 
     Compute the probability of a Line-of-Sight (LoS) connection between a
@@ -20,6 +21,7 @@
 """
 
 """
+
     def path_loss_db :
 
     Mean air-to-ground path loss in dB (Eq. 2 in paper).
@@ -41,19 +43,23 @@
 """
 
 """ 
+
     def path_loss_linear :
 
     Return path loss as a dimensionless linear ratio (not dB).
 """
 
  """
+
     def plot_figure2 :
+
     Figure 2: Path loss vs. drone altitude for two fixed horizontal distances
     r = 200 m and r = 500 m.  Carrier frequency = 2 GHz, urban environment.
 """
 
 
 """
+
     def estimate_num_drones :
     Estimate the initial number of drone-BSs needed based on capacity alone.
 
@@ -73,6 +79,7 @@
 """
 
 """
+
     def generate_scenario1 :
     
     Scenario I — Non-uniform uniform distribution.
@@ -91,6 +98,7 @@
 """
 
 """
+
     def generate_scenario2 :
     
     Scenario II — Gaussian centre + uniform remainder.
@@ -109,6 +117,7 @@
 """
 
 """
+
     def compute_sinr_matrix :
     
     Compute the SINR (linear) for every (user, drone) pair.
@@ -126,6 +135,7 @@
 """
 
 """
+
     def assign_users_to_drones :
     
     Each user connects to the drone giving the highest SINR (best SINR policy).
@@ -138,6 +148,7 @@
 """
 
 """
+
     def count_covered_users :
     
     Count users whose best SINR exceeds the threshold γ_th.
@@ -153,6 +164,7 @@
 """
 
 """
+
     def compute_spectral_efficiency :
     
     Compute average spectral efficiency η̄ = 1 / E{1/η_i}
@@ -169,6 +181,7 @@
 """
 
 """
+
     def compute_rho :
     
     Compute ρ_{j,k} = a_{j,k} / A_j  for each (drone j, subarea k) pair.
@@ -188,6 +201,7 @@
 """
 
 """
+
     def check_capacity_constraint :
     Check Eq. (7): Σ_j  N_UBS · ρ_{j,k} ≥ D_k · S_k  for all k.
 
@@ -204,6 +218,7 @@
 """
 
 """
+
     def utility_U1 :
     U1 (Eq. 14) — Capacity violation penalty.
 
@@ -216,6 +231,7 @@
 """
 
 """
+
     def utility_U3 :
     U3 (Eq. 16) — Spectral efficiency constraint (activated after ζ·N_U users covered).
 
@@ -226,6 +242,7 @@
 """
 
 """
+
     Particle Swarm Optimisation for 3D drone-BS placement.
 
     Each particle encodes the (x, y, h) positions of all N_BS drones
@@ -245,9 +262,14 @@
     max_iter       : maximum PSO iterations
 """
 
-"""def _decode : Reshape a flat particle vector into an (N_BS, 3) drone array"""
+"""
+
+def _decode : Reshape a flat particle vector into an (N_BS, 3) drone array
 
 """
+
+"""
+
     def _evaluate :
     Evaluate the utility function for a given particle and PSO phase.
 
@@ -256,9 +278,12 @@
     Phase 3 → U3  (spectral efficiency)
 """
 
-""" def _clip_position : Clip particle positions to stay within the valid search space."""
+""" 
+
+def _clip_position : Clip particle positions to stay within the valid search space."""
 
 """
+    
     def optimise :
     Run the PSO algorithm (Algorithm 1 in the paper).
 
@@ -273,6 +298,7 @@
 """
 
 """
+    
     def remove_redundant_drones :
     Iteratively remove drone-BSs that are redundant (Section III, last paragraph).
 
@@ -294,12 +320,14 @@
 """
 
 """
+
     def _voronoi_finite_polygons :
     Reconstruct infinite Voronoi regions into finite ones for plotting.
     Adapted from the standard scipy Voronoi plotting helper.
 """
 
 """
+
     def plot_2d_placement :
     Plot 2D map: user positions (blue dots), drone positions (coloured squares),
     and Voronoi tessellation (thin grey lines).  Reproduces Figs 3a and 6a.
@@ -315,6 +343,7 @@
 """
 
 """
+
     def plot_3d_placement :
     3D scatter plot of drone-BS positions. Reproduces Figs 3b and 6b.
 
@@ -326,6 +355,7 @@
 """
 
 """
+
     def plot_sinr_cdf : 
     Plot the empirical CDF of the per-user best SINR (dB). Reproduces Figs 4 and 7.
 
@@ -336,6 +366,7 @@
 """
 
 """
+
     def plot_convergence :
     Plot PSO utility function vs. iteration number. Reproduces Figs 5 and 8.
 
@@ -346,6 +377,7 @@
 """
 
 """
+
     def run_scenario :
     Full pipeline for one scenario:
       1. Estimate initial drone count
@@ -365,6 +397,7 @@
 """
 
 """
+
     def main : 
     Main entry point. Runs all steps in order:
       0. Verify channel model (Fig. 2)
