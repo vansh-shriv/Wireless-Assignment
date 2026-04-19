@@ -264,7 +264,8 @@
 
 """
 
-def _decode : Reshape a flat particle vector into an (N_BS, 3) drone array
+def _decode : 
+Reshape a flat particle vector into an (N_BS, 3) drone array
 
 """
 
@@ -280,7 +281,8 @@ def _decode : Reshape a flat particle vector into an (N_BS, 3) drone array
 
 """ 
 
-def _clip_position : Clip particle positions to stay within the valid search space."""
+def _clip_position : 
+Clip particle positions to stay within the valid search space."""
 
 """
     
