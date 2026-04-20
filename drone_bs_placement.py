@@ -374,6 +374,13 @@ class PSO:
             if val < self.gbest_val:
                 self.gbest_val = val
                 self.gbest_pos = self.pos[l].copy()
+        
+        def display_val(gbest_val, current_phase):
+            if current_phase == 1:
+                return -gbest_val   # U1 stored as negative penalty → flip back
+                                    # so Phase 1 shows POSITIVE values on plot
+            else:
+                return gbest_val    # U2/U3 are already negative user counts
 
         self.history.append(self.gbest_val)
 
@@ -414,6 +421,8 @@ class PSO:
             #  Phase transition logic
             if phase == 1 and self.gbest_val <= 0:
                 phase = 2
+                self.gbest_val = np.inf
+                self.pbest_val[:] = np.inf
                 if verbose:
                     print(f"  [PSO iter {t:4d}] Phase 1→2 (capacity satisfied)")
 
@@ -423,12 +432,14 @@ class PSO:
                 n_covered = count_covered_users(sinr_mat)
                 if n_covered >= ZETA * self.n_u:
                     phase = 3
+                    self.gbest_val = np.inf
+                    self.pbest_val[:] = np.inf
                     if verbose:
                         print(f"  [PSO iter {t:4d}] Phase 2→3 "
                               f"({n_covered}/{self.n_u} users covered)")
 
             #  Convergence check─
-            self.history.append(self.gbest_val)
+            self.history.append(display_val(self.gbest_val, phase))
             if self.gbest_val <= -self.n_u:
                 if verbose:
                     print(f"  [PSO iter {t:4d}] Converged! All users served.")
@@ -753,7 +764,7 @@ def run_scenario(scenario_id: int,
 # SECTION 11 — ENTRY POINT
 
 def main():
-    
+
     print("=" * 60)
     print("  DRONE-BS 3D PLACEMENT — Paper Reproduction")
     print("=" * 60)
